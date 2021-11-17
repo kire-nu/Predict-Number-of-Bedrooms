@@ -20,6 +20,13 @@ with urllib.request.urlopen("https://storage.googleapis.com/street_group_data_sc
 #Store as Dataframe
 propertySampleDF = pd.DataFrame(propertySampleObjects)
 
+# Convert to numeric
+propertySampleDF["number_habitable_rooms"] = pd.to_numeric(propertySampleDF.number_habitable_rooms, errors='coerce')
+propertySampleDF["number_heated_rooms"] = pd.to_numeric(propertySampleDF.number_heated_rooms, errors='coerce')
+propertySampleDF["estimated_min_price"] = pd.to_numeric(propertySampleDF.estimated_min_price, errors='coerce')
+propertySampleDF["estimated_max_price"] = pd.to_numeric(propertySampleDF.estimated_max_price, errors='coerce')
+propertySampleDF["bedrooms"] = pd.to_numeric(propertySampleDF.bedrooms, errors='coerce')
+
 # Change property_type to numerical and remove property_type
 enc = preprocessing.OrdinalEncoder()
 propertyTypeEncoded = enc.fit_transform(propertySampleDF[['property_type']])
